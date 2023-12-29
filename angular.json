@@ -59,7 +59,7 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "650kb",
+                  "maximumWarning": "520kb",
                   "maximumError": "1mb"
                 },
                 {
@@ -85,10 +85,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "kitchen-sink-ai:build:production"
+              "buildTarget": "kitchen-sink-ai:build:production"
             },
             "development": {
-              "browserTarget": "kitchen-sink-ai:build:development"
+              "buildTarget": "kitchen-sink-ai:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -96,7 +96,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "kitchen-sink-ai:build"
+            "buildTarget": "kitchen-sink-ai:build"
           }
         },
         "test": {
