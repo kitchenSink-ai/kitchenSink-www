@@ -8,10 +8,10 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Use Node.js LTS
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: lts/*
 
@@ -24,8 +24,6 @@ jobs:
           npm i -g @angular/cli typescript angular-cli-ghpages
           ng add --skip-confirmation angular-cli-ghpages
           npm ci
-          ng build --configuration production
-          cp README.md dist/kitchen-sink-ai
           MSG="$(git show -s --format='%s' "$GITHUB_SHA")"
           email_author="$(git log -1 --pretty=format:'%an <%ce>')"
           author="${email_author% *}"
@@ -34,4 +32,5 @@ jobs:
           git config --global user.email "$email"
           cname='kitchensink.ai'
           ng build --configuration production --base-href 'https://'"$cname"
+          head -n3 README.md > 'dist/kitchen-sink-ai/README.md'
           npx angular-cli-ghpages --dir='dist/kitchen-sink-ai' --cname="$cname" --repo='https://'"$GITHUB_TOKEN"'@github.com/kitchenSink-ai/kitchensink-ai.github.io' --branch='master' --message="$MSG" --name="$name" --email="$email" --no-silent
