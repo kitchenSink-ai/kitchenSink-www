@@ -31,6 +31,8 @@ jobs:
           email="${email_author#*<}"; email="${email::-1}"
           git config --global user.email "$email"
           cname='kitchensink.ai'
+          dist='dist/kitchen-sink-ai'
           ng build --configuration production --base-href 'https://'"$cname"
-          head -n3 README.md > 'dist/kitchen-sink-ai/README.md'
-          npx angular-cli-ghpages --dir='dist/kitchen-sink-ai' --cname="$cname" --repo='https://'"$GITHUB_TOKEN"'@github.com/kitchenSink-ai/kitchensink-ai.github.io' --branch='master' --message="$MSG" --name="$name" --email="$email" --no-silent
+          head -n3 README.md > "$dist"'/README.md'
+          mv "$dist"'/browser'/* "$dist"
+          npx angular-cli-ghpages --dir="$dist" --cname="$cname" --repo='https://'"$GITHUB_TOKEN"'@github.com/kitchenSink-ai/kitchensink-ai.github.io' --branch='master' --message="$MSG" --name="$name" --email="$email" --no-silent
